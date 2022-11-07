@@ -1,10 +1,10 @@
 # Plane-War
 =================
 
-   * [Preparation](#preparation)<br>
+   * [Environment](#environment)<br>
 
-# Preparation
+# Environment
 
-1. ##### Pycharm 2020.1( I think other vision is also fine)
+1. ##### install pygame
 
-![pycharm](./readme_img/pycharm.png)
+Terminal -> ```python3 -m pip install -U pygame
