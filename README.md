@@ -6,4 +6,4 @@
 # Environment
 
 1. ##### Install pygame
-    Terminal -> ```python3 -m pip install -U pygame
+    Terminal -> python3 -m pip install pygame
