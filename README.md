@@ -10,4 +10,5 @@
     Terminal -> python3 -m pip install pygame
 
 # Stage 1: Generate background and essential components
+
 * Step 1: (#step-1-use-pygame-to-create-gui)<br>
