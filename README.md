@@ -8,6 +8,9 @@
      * [Step 3: Initiate and exit game](#Step-3-initiate-and-exit-game)<br>
    * [Stage 2：Create essential components](#Stage-2-Create-essential-components)<br>
      * [Step 1: Create player's plane](#Step-1-create-player's-plane)<br>
+
+
+
 # Environment
 
 1. ##### Install pygame
@@ -60,4 +63,5 @@ if __name__ == "__main__": #operate the game
 
 # Stage 2：Create essential components
 
+1. ##### Step 1: Create player's plane
 
