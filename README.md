@@ -3,11 +3,11 @@
 
    * [Environment](#environment)<br>
    * [Stage 1：Generate background and initiate the game](#Stage-1-Generate-background-and-initiate-the-game)<br>
-               * [Step 1: Create game background screen](#Step-1-create-game-background-screen)<br>
-               * [Step 2: Define the game main structure with the screen](#Step-2-Define-the-game-main-structure-with-the-screen)<br>
-               * [Step 3: Initiate and exit game](#Step-3-initiate-and-exit-game)<br>
+     * [Step 1: Create game background screen](#Step-1-create-game-background-screen)<br>
+     * [Step 2: Define the game main structure with the screen](#Step-2-Define-the-game-main-structure-with-the-screen)<br>
+     * [Step 3: Initiate and exit game](#Step-3-initiate-and-exit-game)<br>
    * [Stage 2：Create essential components](#Stage-2-Create-essential-components)<br>
-
+     * [Step 1: Create player's plane](#Step-1-create-player's-plane)<br>
 # Environment
 
 1. ##### Install pygame
