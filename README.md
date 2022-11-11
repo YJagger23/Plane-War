@@ -9,7 +9,7 @@
    * [Stage 2：Create essential components](#Stage-2-Create-essential-components)<br>
      * [Step 1: Create player plane](#Step-1-create-player-plane)<br>
      * [Step 2: Create enemy small plane](#Step-2-create-enemy-small-plane)<br>
-     * [Step 3: Create enemy big plane](#Step-3-create-enemy-medium-plane)<br>
+     * [Step 3: Create enemy big plane](#Step-3-create-enemy-big-plane)<br>
      * [Step 4: Create bullets](#Step-4-create-bullets)<br>
 
 
@@ -67,11 +67,28 @@ if __name__ == "__main__": #operate the game
 # Stage 2: Create essential components
 
 1. ##### Step 1: Create player plane
+   1) Initialize the player's image and position
+   ```python
+   class Player(pygame.sprite.Sprite): #use the sprite class to define the 'player' class
+      def __init__(self, bg_size): 
+        pygame.sprite.Sprite.__init__(self) #initialize the player
+        self.image = pygame.image.load("images/player.jpg") #load the image as the player's image
+        self.rect = self.image.get_rect() #get the position of the player
+        self.width, self.height = bg_size[0], bg_size[1]  #localized background image size
+        self.rect.left, self.rect.top = \
+                        (self.width - self.rect.width)//2,\  #set the initial position of the player in the middle
+                        self.height - self.rect.height - 60  leave some space in the bottom
+        self.speed = 10 #set the moving speed for the player
+        self.active = True #set the player initial status as active
+        #self.invicincible = False 
+        self.mask = pygame.mask.from_surface(self.image) #Get a mask of the aircraft image for more accurate collision detection
+   ```
+   2) Define the movement of the player
 
 2. ##### Step 2: Create enemy small plane
 
 
-3. ##### Step 3: Create enemy medium plane
+3. ##### Step 3: Create enemy big plane
 
 
 4. ##### Step 4: Create bullets
