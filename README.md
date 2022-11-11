@@ -61,7 +61,7 @@ if __name__ == "__main__": #operate the game
         input()
 ```
 
-# Stage 2：Create essential components
+# Stage 2: Create essential components
 
 1. ##### Step 1: Create player's plane
 
