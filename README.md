@@ -6,7 +6,7 @@
                * [Step 1: Create game background screen](#Step-1-create-game-background-screen)<br>
                * [Step 2: Define the game main structure with the screen](#Step-2-Define-the-game-main-structure-with-the-screen)<br>
                * [Step 3: Initiate and exit game](#Step-3-initiate-and-exit-game)<br>
-
+   * [Stage 2：Create essential components](#Stage-2-Create-essential-components)<br>
 
 # Environment
 
@@ -56,4 +56,7 @@ if __name__ == "__main__": #operate the game
         traceback.print_exc()  #using traceback module to identify and record errors if any
         pygame.quit()
         input()
+
+# Stage 2：Create essential components
+
 
