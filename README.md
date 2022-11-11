@@ -4,8 +4,8 @@
    * [Environment](#environment)<br>
    * [Stage 1：Generate background and initiate the game](#Stage-1-Generate-background-and-initiate-the-game)<br>
                * [Step 1: Create game background screen](#Step-1-create-game-background-screen)<br>
-               * [Step 2:Define the game main structure with the screen](#Step-2-Define-the-game-main-structure)<br>
-               * [Step 3:Initiate and exit game](#Step-3-initiate-and-exit-game)<br>
+               * [Step 2: Define the game main structure with the screen](#Step-2-Define-the-game-main-structure-with-the-screen)<br>
+               * [Step 3: Initiate and exit game](#Step-3-initiate-and-exit-game)<br>
 
 
 # Environment
