@@ -3,9 +3,9 @@
 
    * [Environment](#environment)<br>
    * [Stage 1：Generate background and initiate the game](#Stage-1-Generate-background-and-initiate-the-game)<br>
-               * [Create game background screen   <em>(LN_01)</em>](#create-game-background-screen---Ln_01)<br>
-               * [Define the game main structure with the screen  <em>(LN_02)</em>](#Define-the-game-main-structure---ln_02)<br>
-               * [Initiate and exit game  <em>(LN_03)</em>](#initiate-and-exit-game--ln_03)<br>
+               * [Step 1: Create game background screen](#Step-1-create-game-background-screen)<br>
+               * [Step 2:Define the game main structure with the screen](#Step-2-Define-the-game-main-structure)<br>
+               * [Step 3:Initiate and exit game](#Step-3-initiate-and-exit-game)<br>
 
 
 # Environment
@@ -15,7 +15,7 @@
 
 # Stage 1: Generate background and initiate the game
 
-1. ##### Step 1: Create game background screen *(LN_01)*
+1. ##### Step 1: Create game background screen
 
 ```python
 bg_size = width, height = 480, 700 #set the size of the background
@@ -23,7 +23,9 @@ screen = pygame.display.set_mode(bg_size) #set the screen of the game
 pygame.display.set_caption("Airplane War - Group 09") #set title of the game screen
 background = pygame.image.load("images/background.png") #load background picture
 ```
-2. ##### Step 2: Define the game main structure with the screen *(LN_02)*
+
+2. ##### Step 2: Define the game main structure with the screen
+
 ```python
 def main(): #define the game of the initial structure
     while True:
@@ -34,7 +36,9 @@ def main(): #define the game of the initial structure
                 sys.exit()
         pygame.display.flip() #Update the full display Surface to the screen
 ```
-3. ##### Step 3: Initiate and exit game *(LN_03)*
+
+3. ##### Step 3: Initiate and exit game 
+
 ```python
 #import essential modules
 import sys
