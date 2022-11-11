@@ -73,45 +73,45 @@ if __name__ == "__main__": #operate the game
    ```python
    class Player(pygame.sprite.Sprite): #use the sprite class to define the 'player' class
       def __init__(self, bg_size): 
-        pygame.sprite.Sprite.__init__(self) #initialize the player
-        self.image = pygame.image.load("images/player.jpg") #load the image as the player's image
-        self.rect = self.image.get_rect() #get the position of the player
-        self.width, self.height = bg_size[0], bg_size[1]  #localized background image size
-        self.rect.left, self.rect.top = \
+          pygame.sprite.Sprite.__init__(self) #initialize the player
+          self.image = pygame.image.load("images/player.jpg") #load the image as the player's image
+          self.rect = self.image.get_rect() #get the position of the player
+          self.width, self.height = bg_size[0], bg_size[1]  #localized background image size
+          self.rect.left, self.rect.top = \
                         (self.width - self.rect.width)//2,\  #set the initial position of the player in the middle
                         self.height - self.rect.height - 60  #leave some space in the bottom
-        self.speed = 10 #set the moving speed for the player
-        self.active = True #set the player initial status as active
-        #self.invicincible = False 
-        self.mask = pygame.mask.from_surface(self.image) #Get a mask of the aircraft image for more accurate collision detection
+          self.speed = 10 #set the moving speed for the player
+          self.active = True #set the player initial status as active
+          #self.invicincible = False 
+          self.mask = pygame.mask.from_surface(self.image) #Get a mask of the aircraft image for more accurate collision detection
    ```
    
    2) Define the movement of the player
 
    ```python
       def moveup (self): #define moveup
-        if self.height - self.rect.top > 0: #when the distance between top of the player and the top of the screen>0
-            self.rect.top -= self.speed # the distance between the top of the screen and the top of the player will be decreased by the player's speed
-        else:
-            self.rect.top = 0 #make sure the player will not move above the top of the screen
+          if self.height - self.rect.top > 0: #when the distance between top of the player and the top of the screen>0
+              self.rect.top -= self.speed # the distance between the top of the screen and the top of the player will be decreased by the player's speed
+          else:
+              self.rect.top = 0 #make sure the player will not move above the top of the screen
       
       def movedown (self): #define movedown
-        if self.height - self.rect.bottom > 60: #when the distance between the top of the screen and the bottom of player>60
-            self.rect.top += self.speed #the distance between the top of the screen and the top of the player will be increased by the player's speed
-        else:
-            self.rect.bottom = self.height - 60 #make sure the player will not move out of the bottom of the screen
+          if self.height - self.rect.bottom > 60: #when the distance between the top of the screen and the bottom of player>60
+              self.rect.top += self.speed #the distance between the top of the screen and the top of the player will be increased by the player's speed
+          else:
+              self.rect.bottom = self.height - 60 #make sure the player will not move out of the bottom of the screen
       
       def moveleft (self): #define moveleft
-        if self.rect.left-0>0: #when the distance between the between the screen left and the left of the player >0
-            self.rect.left -= self.speed #the distance between the screen left and the left of the player will be decreased by the player's speed
-        else:
-            self.rect.left = 0 #make sure the player will not move out of the left of the screen     
+          if self.rect.left-0>0: #when the distance between the between the screen left and the left of the player >0
+              self.rect.left -= self.speed #the distance between the screen left and the left of the player will be decreased by the player's speed
+          else:
+              self.rect.left = 0 #make sure the player will not move out of the left of the screen     
       
       def moveright (self): #define moveright
-        if self.width - self.rect.right>0: #when the distance between the screen right and the right of the player >0
-            self.rect.left += self.speed #the distance between the screen left and the left of the player will be increased by the player's speed
-        else:
-            self.rect.right = self.width #make sure the player will not move out of the right of the screen         
+          if self.width - self.rect.right>0: #when the distance between the screen right and the right of the player >0
+              self.rect.left += self.speed #the distance between the screen left and the left of the player will be increased by the player's speed
+          else:
+              self.rect.right = self.width #make sure the player will not move out of the right of the screen         
    ```
    
    3) Reset the player when crashed
