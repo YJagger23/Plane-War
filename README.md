@@ -56,6 +56,7 @@ if __name__ == "__main__": #operate the game
         traceback.print_exc()  #using traceback module to identify and record errors if any
         pygame.quit()
         input()
+```
 
 # Stage 2：Create essential components
 
