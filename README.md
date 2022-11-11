@@ -67,7 +67,9 @@ if __name__ == "__main__": #operate the game
 # Stage 2: Create essential components
 
 1. ##### Step 1: Create player plane
+
    1) Initialize the player's image and position
+
    ```python
    class Player(pygame.sprite.Sprite): #use the sprite class to define the 'player' class
       def __init__(self, bg_size): 
@@ -83,7 +85,9 @@ if __name__ == "__main__": #operate the game
         #self.invicincible = False 
         self.mask = pygame.mask.from_surface(self.image) #Get a mask of the aircraft image for more accurate collision detection
    ```
+   
    2) Define the movement of the player
+
    ```python
       def moveup (self): #define moveup
         if self.height - self.rect.top > 0: #when the distance between top of the player and the top of the screen>0
@@ -97,18 +101,29 @@ if __name__ == "__main__": #operate the game
         else:
             self.rect.bottom = self.height - 60 #make sure the player will not move out of the bottom of the screen
       
-      def moveleft (self):
-        if self.rect.left-0>0:
-            self.rect.left -= self.speed
+      def moveleft (self): #define moveleft
+        if self.rect.left-0>0: #when the distance between the between the screen left and the left of the player >0
+            self.rect.left -= self.speed #the distance between the screen left and the left of the player will be decreased by the player's speed
         else:
-            self.rect.left = 0      
+            self.rect.left = 0 #make sure the player will not move out of the left of the screen     
       
-      def moveright (self):
-        if self.width - self.rect.right>0:
-            self.rect.left += self.speed
+      def moveright (self): #define moveright
+        if self.width - self.rect.right>0: #when the distance between the screen right and the right of the player >0
+            self.rect.left += self.speed #the distance between the screen left and the left of the player will be increased by the player's speed
         else:
-            self.rect.right = self.width      
+            self.rect.right = self.width #make sure the player will not move out of the right of the screen         
    ```
+   
+   3) Reset the player when crashed
+ 
+   ```python
+      def reset(self):
+          self.rect.left, self.rect.top = \ #rest the player to the original position 
+                        (self.width - self.rect.width)//2,\
+                        self.height - self.rect.height - 60
+          self.active = True 
+   ```
+   
 2. ##### Step 2: Create enemy small plane
 
 
