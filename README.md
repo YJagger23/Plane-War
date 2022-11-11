@@ -2,7 +2,7 @@
 =================
 
    * [Environment](#environment)<br>
-   * [Stage 1：Generate background and essential components] (#Stage-1-Generate-background-and-essential-components)<br>
+   * [Stage 1：Generate background and essential components](#Stage-1-Generate-background-and-essential-components)<br>
 
 # Environment
 
