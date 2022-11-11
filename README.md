@@ -15,7 +15,7 @@
 
 # Stage 1: Generate background and initiate the game
 
-1. ##### Step 1: Create game background screen   *(LN_01)*
+1. ##### Step 1: Create game background screen *(LN_01)*
 
 ```python
 bg_size = width, height = 480, 700 #set the size of the background
@@ -23,7 +23,7 @@ screen = pygame.display.set_mode(bg_size) #set the screen of the game
 pygame.display.set_caption("Airplane War - Group 09") #set title of the game screen
 background = pygame.image.load("images/background.png") #load background picture
 ```
-2. ##### Step 2: Define the game main structure with the screen   *(LN_02)*
+2. ##### Step 2: Define the game main structure with the screen *(LN_02)*
 ```python
 def main(): #define the game of the initial structure
     while True:
@@ -34,24 +34,22 @@ def main(): #define the game of the initial structure
                 sys.exit()
         pygame.display.flip() #Update the full display Surface to the screen
 ```
-3. ##### Step 3: Initiate and exit game   *(LN_03)*
+3. ##### Step 3: Initiate and exit game *(LN_03)*
 ```python
+#import essential modules
 import sys
 import pygame
 import traceback
 
-#initiate the game
-pygame.init()
+pygame.init() #initiate the game
 
-#operate the game
-if __name__ == "__main__":
+if __name__ == "__main__": #operate the game
     try:
         main()
-    #Exit the game using traceback module
-    except SystemExit:
+    except SystemExit: #exit the game
         pass
     except:
-        traceback.print_exc()
+        traceback.print_exc()  #using traceback module to identify and record errors if any
         pygame.quit()
         input()
 
