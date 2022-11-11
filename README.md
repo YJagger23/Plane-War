@@ -8,6 +8,9 @@
      * [Step 3: Initiate and exit game](#Step-3-initiate-and-exit-game)<br>
    * [Stage 2：Create essential components](#Stage-2-Create-essential-components)<br>
      * [Step 1: Create player plane](#Step-1-create-player-plane)<br>
+     * [Step 2: Create enemy small plane](#Step-2-create-enemy-small-plane)<br>
+     * [Step 3: Create enemy big plane](#Step-3-create-enemy-medium-plane)<br>
+     * [Step 4: Create bullets](#Step-4-create-bullets)<br>
 
 
 
@@ -65,6 +68,10 @@ if __name__ == "__main__": #operate the game
 
 1. ##### Step 1: Create player plane
 
+2. ##### Step 2: Create enemy small plane
 
 
+3. ##### Step 3: Create enemy medium plane
 
+
+4. ##### Step 4: Create bullets
