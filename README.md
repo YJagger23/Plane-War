@@ -65,3 +65,6 @@ if __name__ == "__main__": #operate the game
 
 1. ##### Step 1: Create player's plane
 
+
+
+
