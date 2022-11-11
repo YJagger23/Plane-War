@@ -3,9 +3,9 @@
 
    * [Environment](#environment)<br>
    * [Stage 1：Generate background and initiate the game](#Stage-1-Generate-background-and-initiate-the-game)<br>
-               * ​             [Create game background screen   <em>(LN_01)</em>](#create-game-background-screen---ln_01)<br>
+               * ​             [Create game background screen   <em>(LN_01)</em>](#create-game-background-screen---Ln_01)<br>
                * ​             [Define the game main structure with the screen  <em>(LN_02)</em>](#Define-the-game-main-structure---ln_02)<br>
-               * ​             [Initiate and exit game  <em>(LN_03)</em>](#create-main-window--ln_03)<br>
+               * ​             [Initiate and exit game  <em>(LN_03)</em>](#initiate-and-exit-game--ln_03)<br>
 
 
 # Environment
@@ -25,7 +25,6 @@ background = pygame.image.load("images/background.png") #load background picture
 ```
 2. ##### Step 2: Define the game main structure with the screen   *(LN_02)*
 ```python
-
 def main(): #define the game of the initial structure
     while True:
         screen.blit(background, (0, 0)) #put background into the screen at the origin (0,0)-top left position
@@ -37,3 +36,22 @@ def main(): #define the game of the initial structure
 ```
 3. ##### Step 3: Initiate and exit game   *(LN_03)*
 ```python
+import sys
+import pygame
+import traceback
+
+#initiate the game
+pygame.init()
+
+#operate the game
+if __name__ == "__main__":
+    try:
+        main()
+    #Exit the game using traceback module
+    except SystemExit:
+        pass
+    except:
+        traceback.print_exc()
+        pygame.quit()
+        input()
+
