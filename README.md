@@ -125,9 +125,46 @@ if __name__ == "__main__": #operate the game
    ```
    
 2. ##### Step 2: Create enemy small plane
+   1) Initialize the enemy's image by using class and generate position by random module
+   
+   ```python
+      from random import * #import the random module for generating random postion of the enemy
+      
+      class EnemyS(pygame.sprite.Sprite): #use the sprite class to define the 'EnemyS' class
+          def __init__(self, bg_size):
+              pygame.sprite.Sprite.__init__(self)
+              self.image = pygame.image.load("images/enemys.png") #load the image as the enemy's image
+              self.rect = self.image.get_rect() #get the position of enemys
+              self.width, self.height = bg_size[0], bg_size[1] #set the boundry with the background size
+              self.speed = 2 #set the moving speed of enemys
+              self.active = True #set the initial status as active
+              self.rect.left, self.rect.top = \ #use randint from the random module to generate random position of enemys
+                        randint(0, self.width - self.rect.width), \ #set width range from 0 to the right of the screen
+                        randint(-5 * self.height, 0) #set height range from 0 to beyond the bottom of the screen
+              self.mask = pygame.mask.from_surface(self.image) #Get a mask of the image for more accurate collision detection
+   ```                 
+         
+   2) Define the movement of enemy
+   
+   ```python
+      def move(self):
+          if self.height - self.rect.top > 0: #when the distance between the bottom of the screen and the top of enemy >0
+            self.rect.top += self.speed #the distance between the top of enemys and the top of the screen will be increased by the speed of enemys
+          else: #when the distance reach 0
+            self.reset() #reset enemys
+   ```  
+   
+   3) Reset the enemy
+   
+   ```python
+      def reset(self): #reset to a new random position as defined earlier
+        self.rect.left, self.rect.top = \
+            randint(0, self.width - self.rect.width), \
+            randint(-5 * self.height, 0)
+        self.active = True #set enemys to be active again
+   ``` 
+   
+3. ##### Step 3: Create bullets
 
 
-3. ##### Step 3: Create enemy big plane
-
-
-4. ##### Step 4: Create bullets
+4. ##### Step 4: 
