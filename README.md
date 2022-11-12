@@ -9,8 +9,7 @@
    * [Stage 2：Create essential components](#Stage-2-Create-essential-components)<br>
      * [Step 1: Create player plane](#Step-1-create-player-plane)<br>
      * [Step 2: Create enemy small plane](#Step-2-create-enemy-small-plane)<br>
-     * [Step 3: Create enemy big plane](#Step-3-create-enemy-big-plane)<br>
-     * [Step 4: Create bullets](#Step-4-create-bullets)<br>
+     * [Step 3: Create bullets](#Step-3-create-bullets)<br>
 
 
 
