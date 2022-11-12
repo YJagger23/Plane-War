@@ -76,7 +76,7 @@ if __name__ == "__main__": #operate the game
           pygame.sprite.Sprite.__init__(self) #initialize the player
           self.image = pygame.image.load("images/player.jpg") #load the image as the player's image
           self.rect = self.image.get_rect() #get the position of the player
-          self.width, self.height = bg_size[0], bg_size[1]  #localized background image size
+          self.width, self.height = bg_size[0], bg_size[1]  #set the boundry with the background sizee
           self.rect.left, self.rect.top = \
                         (self.width - self.rect.width)//2,\  #set the initial position of the player in the middle
                         self.height - self.rect.height - 60  #leave some space in the bottom
