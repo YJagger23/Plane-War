@@ -68,7 +68,7 @@ if __name__ == "__main__": #operate the game
 
 1. ##### Step 1: Create player plane
 
-   1) Initialize the player's image and position
+   1) Initialize the player's image and position by using class 
 
    ```python
    class Player(pygame.sprite.Sprite): #use the sprite class to define the 'player' class
