@@ -165,6 +165,32 @@ if __name__ == "__main__": #operate the game
    ``` 
    
 3. ##### Step 3: Create bullets
-
-
-4. ##### Step 4: 
+   1) Initialize the bullet's image and position by using class 
+   
+   ```python
+      class Bullet1(pygame.sprite.Sprite): #use the sprite class to define the 'Bullet1' class
+          def __init__(self, position):
+              pygame.sprite.Sprite.__init__(self)
+              self.image = pygame.image.load("images/bullet1.png") #load the image as the bullet's image
+              self.rect.left, self.rect.top = position #set the position of enemys
+              self.speed = 12 #set the moving speed of bullets
+              self.active = False #set the initial status as inactive
+              self.mask = pygame.mask.from_surface(self.image) #Get a mask of the image for more accurate collision detection
+   ```                 
+         
+   2) Define the movement of bullet
+   
+   ```python
+      def move(self):
+          self.rect.top -= self.speed: #the distance between the top of the bullet and the top of the screen is decreased by bullet's speed when active
+          if self.rect.top < 0: #when the bullet is beyond the top of the screen
+            self.active = False #set the bullet inactive
+   ```  
+   
+   3) Reset the bullet
+   
+   ```python
+      def reset(self, position): #reset to the position as defined earlier
+          self.rect.left, self.rect.top = position
+          self.active = True #set bullets to be active again
+   ``` 
