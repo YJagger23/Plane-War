@@ -10,6 +10,7 @@
      * [Step 1: Create player plane](#Step-1-create-player-plane)<br>
      * [Step 2: Create enemy small plane](#Step-2-create-enemy-small-plane)<br>
      * [Step 3: Create bullets](#Step-3-create-bullets)<br>
+     * [Step 4: Put components on the screen](#Step-4-put-components-on-the-screen)<br>
 
 
 
@@ -196,3 +197,7 @@ if __name__ == "__main__": #operate the game
           self.rect.left, self.rect.top = position
           self.active = True #set bullets to be active again
    ``` 
+
+4. ##### Step 4 Put components on the screen
+
+
