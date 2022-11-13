@@ -6,7 +6,7 @@
      * [Step 1: Create game background screen](#Step-1-create-game-background-screen)<br>
      * [Step 2: Define the game main structure with the screen](#Step-2-Define-the-game-main-structure-with-the-screen)<br>
      * [Step 3: Initiate and exit game](#Step-3-initiate-and-exit-game)<br>
-   * [Stage 2：Create essential components](#Stage-2-Create-essential-components)<br>
+   * [Stage 2：Create essential components and put on the screen](#Stage-2-Create-essential-components-and-put-on-the-screen)<br>
      * [Step 1: Create player plane](#Step-1-create-player-plane)<br>
      * [Step 2: Create enemy small plane](#Step-2-create-enemy-small-plane)<br>
      * [Step 3: Create bullets](#Step-3-create-bullets)<br>
@@ -33,13 +33,16 @@ background = pygame.image.load("images/background.png") #load background picture
 
 ```python
 def main(): #define the game of the initial structure
-    while True:
+    clock = pygame.time.Clock() #create a clock to help track time
+    running = true #ask the program to run
+    while running:
         screen.blit(background, (0, 0)) #put background into the screen at the origin (0,0)-top left position
-        for event in pygame.event.get(): #create a temporary event loop
+        for event in pygame.event.get(): #create an event loop
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
         pygame.display.flip() #Update the full display Surface to the screen
+        clock.tick(60) #set the framerate to be 60 fps
 ```
 
 3. ##### Step 3: Initiate and exit game 
@@ -63,7 +66,7 @@ if __name__ == "__main__": #operate the game
         input()
 ```
 
-# Stage 2: Create essential components
+# Stage 2: Create essential components and put on the screen
 
 1. ##### Step 1: Create player plane
 
@@ -89,7 +92,7 @@ if __name__ == "__main__": #operate the game
 
    ```python
       def moveup (self): #define moveup
-          if self.height - self.rect.top > 0: #when the distance between top of the player and the top of the screen>0
+          if self.rect.top > 0: #when the distance between top of the player and the top of the screen>0
               self.rect.top -= self.speed # the distance between the top of the screen and the top of the player will be decreased by the player's speed
           else:
               self.rect.top = 0 #make sure the player will not move above the top of the screen
