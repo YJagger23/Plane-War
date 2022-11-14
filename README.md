@@ -2,10 +2,15 @@
 =================
 
    * [Environment](#environment)<br>
-   * [Stage 1：Generate background and initiate the game](#Stage-1-Generate-background-and-initiate-the-game)<br>
+   * [Stage 0：Generate background and initiate the game](#Stage-0-Generate-background-and-initiate-the-game)<br>
      * [Step 1: Create game background screen](#Step-1-create-game-background-screen)<br>
      * [Step 2: Define the game main structure with the screen](#Step-2-Define-the-game-main-structure-with-the-screen)<br>
      * [Step 3: Initiate and exit game](#Step-3-initiate-and-exit-game)<br>
+   * [Stage 1：Create essential components and put on the screen](#Stage-1-Create-essential-components-and-put-on-the-screen)<br>
+     * [Step 1: Create player plane](#Step-1-create-player-plane)<br>
+     * [Step 2: Create enemy small plane](#Step-2-create-enemy-small-plane)<br>
+     * [Step 3: Create enemy big plane](#Step-3-create-enemy-big-plane)<br>
+     * [Step 4: Put components on the screen](#Step-4-put-components-on-the-screen)<br>
    * [Stage 2：Create essential components and put on the screen](#Stage-2-Create-essential-components-and-put-on-the-screen)<br>
      * [Step 1: Create player plane](#Step-1-create-player-plane)<br>
      * [Step 2: Create enemy small plane](#Step-2-create-enemy-small-plane)<br>
@@ -13,13 +18,12 @@
      * [Step 4: Put components on the screen](#Step-4-put-components-on-the-screen)<br>
 
 
-
 # Environment
 
 1. ##### Install pygame
     Terminal -> python3 -m pip install pygame
 
-# Stage 1: Generate background and initiate the game
+# Stage 0: Generate background and initiate the game
 
 1. ##### Step 1: Create game background screen
 
@@ -67,7 +71,8 @@ if __name__ == "__main__": #operate the game
         input()
 ```
 
-# Stage 2: Create essential components and put on the screen
+# Stage 1: Create essential components and put on the screen
+  - at this stage, we only assume that all the components are active as default status
 
 1. ##### Step 1: Create player plane
 
@@ -86,7 +91,7 @@ if __name__ == "__main__": #operate the game
           self.speed = 10 #set the moving speed for the player
           self.active = True #set the player initial status as active
           #self.invicincible = False 
-          self.mask = pygame.mask.from_surface(self.image) #Get a mask of the aircraft image for more accurate collision detection
+          #self.mask = pygame.mask.from_surface(self.image) #Get a mask of the aircraft image for more accurate collision detection
    ```
    
    2) Define the movement of the player
@@ -118,13 +123,14 @@ if __name__ == "__main__": #operate the game
    ```
    
    3) Reset the player when crashed
- 
+      (include the reset function as preparation for further stages)
+      
    ```python
       def reset(self):
           self.rect.left, self.rect.top = \ #rest the player to the original position 
                         (self.width - self.rect.width)//2,\
                         self.height - self.rect.height - 60
-          self.active = True 
+          self.active = True #set the default status as active
    ```
    
 2. ##### Step 2: Create enemy small plane
@@ -144,7 +150,7 @@ if __name__ == "__main__": #operate the game
               self.rect.left, self.rect.top = \ #use randint from the random module to generate random position of enemys
                         randint(0, self.width - self.rect.width), \ #set width range from 0 to the right of the screen
                         randint(-5 * self.height, 0) #set height range from 0 to -5 times beyond the bottom of the screen to leave more time 
-              self.mask = pygame.mask.from_surface(self.image) #Get a mask of the image for more accurate collision detection
+              #self.mask = pygame.mask.from_surface(self.image) #Get a mask of the image for more accurate collision detection
    ```                 
          
    2) Define the movement of enemy
@@ -152,9 +158,9 @@ if __name__ == "__main__": #operate the game
    ```python
       def move(self):
           if self.height - self.rect.top > 0: #when the distance between the bottom of the screen and the top of enemy >0
-            self.rect.top += self.speed #the distance between the top of enemys and the top of the screen will be increased by the speed of enemys
+              self.rect.top += self.speed #the distance between the top of enemys and the top of the screen will be increased by the speed of enemys
           else: #when the distance reach 0
-            self.reset() #reset enemys
+              self.reset() #reset enemys
    ```  
    
    3) Reset the enemy
@@ -197,7 +203,7 @@ if __name__ == "__main__": #operate the game
           while running:...     
               screen.blit(Ares.image, Ares.rect) #put the player's plane into the screen as defined in the player class
    ```
-   2) Add the enemy plane (EnemyS for instance; Enemy B will be similar)
+   2) Add the enemy plane (EnemyS for instance; EnemyB will be similar)
    
    ```python
       
