@@ -11,9 +11,9 @@
      * [Step 2: Create enemy small plane](#Step-2-create-enemy-small-plane)<br>
      * [Step 3: Create enemy big plane](#Step-3-create-enemy-big-plane)<br>
      * [Step 4: Put components on the screen](#Step-4-put-components-on-the-screen)<br>
-   * [Stage 2：Create essential components and put on the screen](#Stage-2-Create-essential-components-and-put-on-the-screen)<br>
-     * [Step 1: Create player plane](#Step-1-create-player-plane)<br>
-     * [Step 2: Create enemy small plane](#Step-2-create-enemy-small-plane)<br>
+   * [Stage 2：Process plane fight and record scores](#Stage-2-process-plane-fight-and-record-scores)<br>
+     * [Step 1: Create bullet](#Step-1-create-bullet)<br>
+     * [Step 2: Add functions to detect hit](#Step-2-Add-functions-to-detect-hit)<br>
      * [Step 3: Create enemy big plane](#Step-3-create-enemy-big-plane)<br>
      * [Step 4: Put components on the screen](#Step-4-put-components-on-the-screen)<br>
 
@@ -201,7 +201,8 @@ if __name__ == "__main__": #operate the game
               Ares.moveright()
           
           while running:...     
-              screen.blit(Ares.image, Ares.rect) #put the player's plane into the screen as defined in the player class
+              if Ares.active:
+                  screen.blit(Ares.image, Ares.rect) #put the player's plane into the screen as defined in the player class
    ```
    2) Add the enemy plane (EnemyS for instance; EnemyB will be similar)
    
@@ -223,8 +224,127 @@ if __name__ == "__main__": #operate the game
           
           while running:...     
               for each in EnemyS: #put enemyS into the screen as defined in the EnemyS class
-                  each.move() 
-                  screen.blit(each.image, each.rect)
+                  if each.active:
+                      each.move() 
+                      screen.blit(each.image, each.rect)
+   ```
+
+# Stage 2: Process plane fight and record score
+1. ##### Step 1: Create bullet
+   1) Initialize bullet image and position by using class
+   
+   ```python
+   class Bullet(pygame.sprite.Sprite): #create class bullet
+   def __init__(self, position): #initialize bullet use the position variable
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("images/bullet.png") #load the image as the bullet
+        self.rect = self.image.get_rect() #get the position of bullet
+        self.rect.left, self.rect.top = position #set the position of bullet as the position externally (from the player)
+        self.speed = 14 #set the moving speed of bullet (slightly faster than the player)
+        self.active = True #set the initial status as active
+        self.mask = pygame.mask.from_surface(self.image) #Get a mask of the image for more accurate collision detection
    ```
    
+   2) Define the movement of the bullet
    
+   ```python
+   def move(self):
+        self.rect.top -= self.speed #the distance between the top and the top of the screen will be decreased by the speed of the bullet
+        if self.rect.top < 0: #when the bullet is beyond the top of the screen
+            self.active = False  #set the bullet inactive
+   ```
+
+   3) Reset the bullet
+   
+   ```python
+   def reset(self, position): #reset bullet
+        self.rect.left, self.rect.top = position 
+        self.active = True
+   ``` 
+
+   4) Add the bullet to the main function
+   
+   ```python
+   def main:...
+        bullet = [] #call in bullet
+        bullet_index = 0 #set the original index as 0
+        bullet_num = 6  #set the number of bullet each time at 6
+
+        for i in range(bullet_num): #generate the loop to add bullet
+            bullet.append(MISC.Bullet(Ares.rect.midtop)) #the position of the bullet will start from the midtop of the player
+   ``` 
+
+   5) Add variable 'delay' to define the frequency of the bullets
+   ```python
+   def main:...
+        delay = 100 #set the default delay value at 100
+
+        while running:
+            if not (delay % 10):  #set the frequency of the bullet as 10 fps
+                bullet[bullet_index].reset(Ares.rect.midtop) #set the reset of bullet to be able to shoot bullets continuously
+                bullet_index = (bullet_index + 1) % bullet_num #add more bullets at the same time according to the defined number
+                
+            #add a loop for delay
+            delay -= 1 
+            if delay == 0:
+                delay = 100
+   ``` 
+   
+   ```python
+   def main:...
+        bullet = [] #call in bullet
+        bullet_index = 0 #set the original index as 0
+        bullet_num = 6  #set the number of bullet each time at 6
+
+    for i in range(bullet_num): #generate the loop to add bullet
+        bullet.append(MISC.Bullet(Ares.rect.midtop)) #the position of the bullet will start from the midtop of the player
+   ``` 
+2. ##### Step 2: Add functions to detect hit
+   1) Add a mask function for each components involved in the detection to enable the detection
+   
+   ```python
+   class xxx:
+        self.mask = pygame.mask.from_surface(self.image) #Get a mask of the image for more accurate collision detection
+   ``` 
+   
+   2) Use spritecollide function to check if the enemy hit the player
+      (we will deal with the player's status later)
+   
+   ```python
+   while running:
+        enemies_down = pygame.sprite.spritecollide(Ares, enemies, False, pygame.sprite.collide_mask) #define how to detect if the enemy hits the player
+        if enemies_down: #if the enemy hits the player
+            for e in enemies_down: #the enemy in this consition
+                e.active = False #will be inactive
+   ``` 
+   
+   3) Use spritecollide function to check if the bullet hit the enemy
+   
+   ```python
+   while running:
+      for b in bullet: #define in the bullet section
+          if b.active: #when bullet is active
+             screen.blit(b.image, b.rect) #put the bullet into the screen as defined in the EnemyS class
+             b.move() 
+             enemies_hit = pygame.sprite.spritecollide(b, enemies, False, pygame.sprite.collide_mask)  #define how to detect if the bullet hits the enemy
+             if enemies_hit: #if hit is true
+                 b.active = False #the bullet will stop
+                 for e in enemies_hit: #thus the enemy that hitted by the bullet
+                     e.active = False #will be inactive
+   ``` 
+   
+   4) Add status of being hitted for all enemy planes
+   
+   ```python
+   for each in EnemyS:
+            if each.active:
+                screen.blit(each.image, each.rect)
+                each.move()
+            else: #ask the main function to reset enemy when it is hit
+                each.reset()
+   ``` 
+   
+
+
+
+
