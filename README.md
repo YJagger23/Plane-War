@@ -89,8 +89,6 @@ if __name__ == "__main__": #operate the game
                         self.height - self.rect.height - 60  #leave some space in the bottom
           self.speed = 10 #set the moving speed for the player
           self.active = True #set the player initial status as active
-          #self.invicincible = False 
-          #self.mask = pygame.mask.from_surface(self.image) #Get a mask of the aircraft image for more accurate collision detection
    ```
    
    2) Define the movement of the player
