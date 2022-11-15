@@ -15,7 +15,6 @@
      * [Step 1: Create bullet](#Step-1-create-bullet)<br>
      * [Step 2: Add functions to detect hit](#Step-2-Add-functions-to-detect-hit)<br>
      * [Step 3: Record score for the game](#Step-3-record-score-for-the-game)<br>
-     * [Step 4: Put components on the screen](#Step-4-put-components-on-the-screen)<br>
 
 
 # Environment
