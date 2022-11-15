@@ -14,7 +14,7 @@
    * [Stage 2：Process plane fight and record scores](#Stage-2-process-plane-fight-and-record-scores)<br>
      * [Step 1: Create bullet](#Step-1-create-bullet)<br>
      * [Step 2: Add functions to detect hit](#Step-2-Add-functions-to-detect-hit)<br>
-     * [Step 3: Create enemy big plane](#Step-3-create-enemy-big-plane)<br>
+     * [Step 3: Record score for the game](#Step-3-record-score-for-the-game)<br>
      * [Step 4: Put components on the screen](#Step-4-put-components-on-the-screen)<br>
 
 
@@ -296,8 +296,8 @@ if __name__ == "__main__": #operate the game
         bullet_index = 0 #set the original index as 0
         bullet_num = 6  #set the number of bullet each time at 6
 
-    for i in range(bullet_num): #generate the loop to add bullet
-        bullet.append(MISC.Bullet(Ares.rect.midtop)) #the position of the bullet will start from the midtop of the player
+        for i in range(bullet_num): #generate the loop to add bullet
+            bullet.append(MISC.Bullet(Ares.rect.midtop)) #the position of the bullet will start from the midtop of the player
    ``` 
 2. ##### Step 2: Add functions to detect hit
    1) Add a mask function for each components involved in the detection to enable the detection
@@ -330,7 +330,19 @@ if __name__ == "__main__": #operate the game
              if enemies_hit: #if hit is true
                  b.active = False #the bullet will stop
                  for e in enemies_hit: #thus the enemy that hitted by the bullet
-                     e.active = False #will be inactive
+                      if e in EnemyB: #for EnemyB, 5 bullets will be required to take it down
+                            e.energy -= 1 #the EnemyB's energy will be down by 1 every time hitted
+                            if e.energy == 0: #when energy goes to 0
+                                e.active = False #set the status as inactive
+                      if e in EnemyS: #for EnemyS
+                          e.active = False #will be inactive when hitted
+   
+   class EnemyB:... #add energy to the EnemyB class
+      energy = 5
+      def __init__(self, bg_size):...
+          self.energy = EnemyB.energy
+      def reset(self):...
+          self.energy = EnemyB.energy
    ``` 
    
    4) Add status of being hitted for all enemy planes
@@ -344,7 +356,31 @@ if __name__ == "__main__": #operate the game
                 each.reset()
    ``` 
    
+3. ##### Step 3: Record score for the game
+   1) Initiate score attributes
+   
+   ```python
+   def main():...
+       score = 0 #set the initial score at 0
+       score_font = pygame.font.SysFont("arial", 36) #set the initial font of score expression
+       score_color = (255,255,255) #set the initial color of score expression
+   ``` 
+   
+   2) Add score rules for each enemy class
+   
+   ```python
+   if enemies_hit:...
+       if e in EnemyB:...
+          score +=1000
+       if e in EnemyS:
+          score +=500
+   ``` 
 
-
-
+   3) Put score on the screen
+   
+   ```python
+   while running:...
+        score_text = score_font.render("Score: %s" % str(score), True, score_color) #define the score text
+        screen.blit(score_text,(10,5)) #put the score text on the top left of the screen
+   ``` 
 
