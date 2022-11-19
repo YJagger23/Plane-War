@@ -15,7 +15,10 @@
      * [Step 1: Create bullet](#Step-1-create-bullet)<br>
      * [Step 2: Add functions to detect hit](#Step-2-Add-functions-to-detect-hit)<br>
      * [Step 3: Record score for the game](#Step-3-record-score-for-the-game)<br>
-
+   * [Stage 3：Improving the game](#Stage-3-Improving-the-game)<br>
+     * [Step 1: Add level settings to add difficulty](#Step-1-Add-level-settings-to-add-difficulty)<br>
+     * [Step 2: Add functions to detect hit](#Step-2-Add-functions-to-detect-hit)<br>
+     * [Step 3: Record score for the game](#Step-3-record-score-for-the-game)<br>
 
 # Environment
 
@@ -359,7 +362,7 @@ if __name__ == "__main__": #operate the game
    ```python
    def main():...
        score = 0 #set the initial score at 0
-       score_font = pygame.font.SysFont("arial", 36) #set the initial font of score expression
+       score_font = pygame.font.SysFont("chalkduster", 32) #set the initial font of score expression
        score_color = (255,255,255) #set the initial color of score expression
    ``` 
    
@@ -381,3 +384,34 @@ if __name__ == "__main__": #operate the game
         screen.blit(score_text,(10,5)) #put the score text on the top left of the screen
    ``` 
 
+# Stage 3: Improving the game
+1. ##### Step 1: Add level settings to add difficulty
+   1) Initiate level attributes
+   
+   ```python
+   def main():...
+       level = 1 #set the initial level at 1
+       level_font = pygame.font.SysFont("chalkduster", 18) #set the initial font of level expression
+       level_color = (255,255,255) #set the initial color of level expression
+   ``` 
+   
+   2) Add level rules 
+   
+   ```python
+   if level == 1 and score>5000:
+            level = 2
+            add_EnemyS(EnemyS,enemies,3)
+            add_EnemyB(EnemyS,enemies,1)
+        elif level == 2 and score>30000:
+            level = 3
+            for e in EnemyS:
+                e.speed += 1
+   ``` 
+
+   3) Put level on the screen
+   
+   ```python
+   while running:...
+        level_text = level_font.render("Level: %s" % str(score), True, level_color) #define the level text
+        screen.blit(level_text,(380,5)) #put the score text on the top right of the screen
+   ``` 
