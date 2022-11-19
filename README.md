@@ -20,6 +20,7 @@
      * [Step 2: Add pause and stop function](#Step-2-Add-pause-and-stop-function)<br>
      * [Step 3: Add life function](#Step-3-add-life-function)<br>
      * [Step 4: Define losing game policy and screen](#Step-4-define-losing-game-policy-and-screen)<br>
+     * [Step 5: Add others](#Step-5-add-others)<br>
 
 # Environment
 
@@ -485,8 +486,9 @@ if __name__ == "__main__": #operate the game
                 if Ares.active: 
                     screen.blit(Ares.image, Ares.rect)
                 else: #when Ares is not active which means it is hitted by enemies
-                    life_num -= 1 #life num minus 2
-                    Ares.reset() #reset the Ares
+                    if not (delay % 15): #including delay for the performance
+                        life_num -= 1 #life num minus 2
+                        Ares.reset() #reset the Ares
    ``` 
    
    3) Put the life icon on the screen
@@ -510,4 +512,53 @@ if __name__ == "__main__": #operate the game
        gameover_rect.left, gameover_rect.top = (width - gameover_rect.width)//2,\ #set the position of the gameover pic in the middle of the screen
                                           (height - gameover_rect.height)//2
    ``` 
-
+   
+   2) Put the life icon on the screen
+   
+   ```python
+   while running:...
+        elif life_num == 0: #set the policy when life num is equal to 0
+            screen.blit(gameover_image, gameover_rect) #show the gameover pic as defined.
+   ``` 
+   
+5. ##### Step 5: Add others
+   1) Add background music
+   
+   ```python
+   pygame.mixer.init()
+   pygame.mixer.music.load("sound/music3.ogg") #load music
+   pygame.mixer.music.set_volume(0.2) #set music volum
+   def main():...
+        pygame.mixer.music.play(-1) #play music in loop
+   ```
+   
+   2) Add mute function and icon
+   
+   ```python
+   def main():... 
+        mute = False
+        mute_image = pygame.image.load("images/mute.png")
+        music_rect = mute_image.get_rect() 
+        music_rect.left, music_rect.top = (width - restarted_rect.width-5)\
+                                    ,40+restarted_rect.height
+        unmute_image = pygame.image.load("images/unmute.png")
+        music_image = mute_image
+   
+   while running:...
+            elif event.type == MOUSEBUTTONDOWN:
+                if event.button == 1 and music_rect.collidepoint(event.pos):
+                    mute = not mute
+                    if mute:
+                        pygame.mixer.music.pause()
+                        pygame.mixer.pause()
+                    else:
+                        pygame.mixer.music.unpause()
+                        pygame.mixer.unpause
+            elif event.type == MOUSEMOTION: #when mouse move 
+                if music_rect.collidepoint(event.pos): #when mouse move on the icon
+                    if mute:
+                        music_image = unmute_image #change the icon according to the status
+                else:
+                    if not mute:
+                        music_image = mute_image
+   ```
