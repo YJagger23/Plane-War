@@ -19,7 +19,7 @@
      * [Step 1: Add level settings to increase difficulty](#Step-1-Add-level-settings-to-increase-difficulty)<br>
      * [Step 2: Add pause and stop function](#Step-2-Add-pause-and-stop-function)<br>
      * [Step 3: Add life function](#Step-3-add-life-function)<br>
-     * [Step 4: Define losing the game](#Step-4-define-losing-game)<br>
+     * [Step 4: Define losing game policy and screen](#Step-4-define-losing-game-policy-and-screen)<br>
 
 # Environment
 
@@ -463,30 +463,30 @@ if __name__ == "__main__": #operate the game
         screen.blit(resume_image, resumed_rect)
    ``` 
 
-2. ##### Step 3: Add life function
+3. ##### Step 3: Add life function
    1) Initiate life function
    
    ```python
    def main():...
-   life_image = pygame.image.load("images/life.png") #load life pic
-   life_rect = life_image.get_rect() #get the position of life image
-   life_num = 3 #define the initial number of life
+       life_image = pygame.image.load("images/life.png") #load life pic
+       life_rect = life_image.get_rect() #get the position of life image
+       life_num = 3 #define the initial number of life
    ``` 
    
    2) Add life rules 
    
    ```python
    while running:...
-            if life_num and not paused: 
+            if life_num and not paused: #add condition regarding life_num
             ...
                 if enemies_down:
-                    Ares.active = False
+                    Ares.active = False #define Ares false when hitted
                 ...
-                if Ares.active:
+                if Ares.active: 
                     screen.blit(Ares.image, Ares.rect)
-                else:
-                    life_num -= 1
-                    Ares.reset()
+                else: #when Ares is not active which means it is hitted by enemies
+                    life_num -= 1 #life num minus 2
+                    Ares.reset() #reset the Ares
    ``` 
    
    3) Put the life icon on the screen
@@ -494,8 +494,20 @@ if __name__ == "__main__": #operate the game
    ```python
    while running:...
         if life_num:
-              for i in range(life_num): #if 0<life<3
+              for i in range(life_num): #if 0<life<3 
                    screen.blit(life_image, \
                             (width - 10 - (i + 1) * life_rect.width, \ #put the number of life left on the screen
                             height - 10 - life_rect.height))
    ``` 
+
+4. ##### Step 4: Define losing game policy and screen
+   1) Initiate gameover image
+   
+   ```python
+   def main():...
+       gameover_image = pygame.image.load("images/gameover.png") #load the picture of gameover
+       gameover_rect = gameover_image.get_rect() #get the position of gameover pic
+       gameover_rect.left, gameover_rect.top = (width - gameover_rect.width)//2,\ #set the position of the gameover pic in the middle of the screen
+                                          (height - gameover_rect.height)//2
+   ``` 
+
