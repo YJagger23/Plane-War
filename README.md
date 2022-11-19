@@ -16,8 +16,8 @@
      * [Step 2: Add functions to detect hit](#Step-2-Add-functions-to-detect-hit)<br>
      * [Step 3: Record score for the game](#Step-3-record-score-for-the-game)<br>
    * [Stage 3：Improving the game](#Stage-3-Improving-the-game)<br>
-     * [Step 1: Add level settings to add difficulty](#Step-1-Add-level-settings-to-add-difficulty)<br>
-     * [Step 2: Add functions to detect hit](#Step-2-Add-functions-to-detect-hit)<br>
+     * [Step 1: Add level settings to increase difficulty](#Step-1-Add-level-settings-to-increase-difficulty)<br>
+     * [Step 2: Add pause and stop function](#Step-2-Add-pause-and-stop-function)<br>
      * [Step 3: Record score for the game](#Step-3-record-score-for-the-game)<br>
 
 # Environment
@@ -385,7 +385,7 @@ if __name__ == "__main__": #operate the game
    ``` 
 
 # Stage 3: Improving the game
-1. ##### Step 1: Add level settings to add difficulty
+1. ##### Step 1: Add level settings to increase difficulty
    1) Initiate level attributes
    
    ```python
@@ -414,4 +414,50 @@ if __name__ == "__main__": #operate the game
    while running:...
         level_text = level_font.render("Level: %s" % str(score), True, level_color) #define the level text
         screen.blit(level_text,(380,5)) #put the score text on the top right of the screen
+   ``` 
+
+2. ##### Step 2: Add pause and stop function
+   1) Initiate pause and resume bottons
+   
+   ```python
+   def main():...
+      paused = False #set the initial status of pause as False
+      pause_image = pygame.image.load("images/pause.png") #set pause image
+      resume_image = pygame.image.load("images/resume.png") #set resume image
+      stop_image = pygame.image.load("images/stop.png") #set stop image
+      stopped_rect = pause_image.get_rect() #get the position of the stop image
+      stopped_rect.left, stopped_rect.top = (width - stopped_rect.width-5),35 #set the position of the stop image
+      resumed_rect = resume_image.get_rect() #get the position of the resume image
+      resumed_rect.left, resumed_rect.top = (width - stopped_rect.width
+                                             - resumed_rect.width-5),35 #set the position of the resume image
+      paused_rect = pause_image.get_rect() #get the position of the pause image
+      paused_rect.left, paused_rect.top = (width - stopped_rect.width #set the position of the pause image
+                                           - paused_rect.width-
+                                           resumed_rect.width-5),35 
+   ``` 
+   
+   2) Add level rules 
+   
+   ```python
+   while running:...
+            for event in pygame.event.get(): 
+                ...
+                elif event.type == MOUSEBUTTONDOWN and paused_rect.collidepoint(event.pos): #check if the mouse clicked in the pause image area
+                    if event.button == 1: #if the mouse clicked
+                        paused = True #set the status as paused
+                elif event.type == MOUSEBUTTONDOWN and resumed_rect.collidepoint(event.pos): #check if the mouse clicked in the resume image area
+                    if event.button == 1: #if the mouse clicked
+                        paused = False #set the status as not paused
+                elif event.type == MOUSEBUTTONDOWN and stopped_rect.collidepoint(event.pos):
+                    if event.button == 1: #if the mouse clicked
+                        paused = False
+   ``` 
+
+   3) Put the buttons on the screen
+   
+   ```python
+   while running:...
+        screen.blit(stop_image, stopped_rect)
+        screen.blit(pause_image, paused_rect)
+        screen.blit(resume_image, resumed_rect)
    ``` 
