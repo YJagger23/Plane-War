@@ -562,3 +562,39 @@ if __name__ == "__main__": #operate the game
                     if not mute:
                         music_image = mute_image
    ```
+
+3) Bug a to be fixed.
+   
+   ```python
+   class player:...
+        self.invicincible = False #set the player to be invicinble for a period
+        
+   def main():... 
+        mute = False
+        mute_image = pygame.image.load("images/mute.png")
+        music_rect = mute_image.get_rect() 
+        music_rect.left, music_rect.top = (width - restarted_rect.width-5)\
+                                    ,40+restarted_rect.height
+        unmute_image = pygame.image.load("images/unmute.png")
+        music_image = mute_image
+   
+   while running:...
+            elif event.type == MOUSEBUTTONDOWN:
+                if event.button == 1 and music_rect.collidepoint(event.pos):
+                    mute = not mute
+                    if mute:
+                        pygame.mixer.music.pause()
+                        pygame.mixer.pause()
+                    else:
+                        pygame.mixer.music.unpause()
+                        pygame.mixer.unpause
+            elif event.type == MOUSEMOTION: #when mouse move 
+                if music_rect.collidepoint(event.pos): #when mouse move on the icon
+                    if mute:
+                        music_image = unmute_image #change the icon according to the status
+                else:
+                    if not mute:
+                        music_image = mute_image
+   ```
+    #set the player to be invicinble for a period
+        self.invicincible = False 
