@@ -18,7 +18,8 @@
    * [Stage 3：Improving the game](#Stage-3-Improving-the-game)<br>
      * [Step 1: Add level settings to increase difficulty](#Step-1-Add-level-settings-to-increase-difficulty)<br>
      * [Step 2: Add pause and stop function](#Step-2-Add-pause-and-stop-function)<br>
-     * [Step 3: Record score for the game](#Step-3-record-score-for-the-game)<br>
+     * [Step 3: Add life function](#Step-3-add-life-function)<br>
+     * [Step 4: Define losing the game](#Step-4-define-losing-game)<br>
 
 # Environment
 
@@ -424,14 +425,14 @@ if __name__ == "__main__": #operate the game
       paused = False #set the initial status of pause as False
       pause_image = pygame.image.load("images/pause.png") #set pause image
       resume_image = pygame.image.load("images/resume.png") #set resume image
-      stop_image = pygame.image.load("images/stop.png") #set stop image
-      stopped_rect = pause_image.get_rect() #get the position of the stop image
-      stopped_rect.left, stopped_rect.top = (width - stopped_rect.width-5),35 #set the position of the stop image
+      restart_image = pygame.image.load("images/restart.png") #set restart image
+      restarted_rect = restart_image.get_rect() #get the position of the restart image
+      restarted_rect.left, restarted_rect.top = (width - restarted_rect.width-5),35 #set the position of the restart image
       resumed_rect = resume_image.get_rect() #get the position of the resume image
-      resumed_rect.left, resumed_rect.top = (width - stopped_rect.width
-                                             - resumed_rect.width-5),35 #set the position of the resume image
+      resumed_rect.left, resumed_rect.top = (width - restarted_rect.width #set the position of the resume image
+                                             - resumed_rect.width-5),35 
       paused_rect = pause_image.get_rect() #get the position of the pause image
-      paused_rect.left, paused_rect.top = (width - stopped_rect.width #set the position of the pause image
+      paused_rect.left, paused_rect.top = (width - restarted_rect.width #set the position of the pause image
                                            - paused_rect.width-
                                            resumed_rect.width-5),35 
    ``` 
@@ -448,16 +449,53 @@ if __name__ == "__main__": #operate the game
                 elif event.type == MOUSEBUTTONDOWN and resumed_rect.collidepoint(event.pos): #check if the mouse clicked in the resume image area
                     if event.button == 1: #if the mouse clicked
                         paused = False #set the status as not paused
-                elif event.type == MOUSEBUTTONDOWN and stopped_rect.collidepoint(event.pos):
+                elif event.type == MOUSEBUTTONDOWN and restarted_rect.collidepoint(event.pos):
                     if event.button == 1: #if the mouse clicked
-                        paused = False
+                        main()
    ``` 
 
    3) Put the buttons on the screen
    
    ```python
    while running:...
-        screen.blit(stop_image, stopped_rect)
+        screen.blit(restart_image, restarted_rect)
         screen.blit(pause_image, paused_rect)
         screen.blit(resume_image, resumed_rect)
+   ``` 
+
+2. ##### Step 3: Add life function
+   1) Initiate life function
+   
+   ```python
+   def main():...
+   life_image = pygame.image.load("images/life.png") #load life pic
+   life_rect = life_image.get_rect() #get the position of life image
+   life_num = 3 #define the initial number of life
+   ``` 
+   
+   2) Add life rules 
+   
+   ```python
+   while running:...
+            if life_num and not paused: 
+            ...
+                if enemies_down:
+                    Ares.active = False
+                ...
+                if Ares.active:
+                    screen.blit(Ares.image, Ares.rect)
+                else:
+                    life_num -= 1
+                    Ares.reset()
+   ``` 
+   
+   3) Put the life icon on the screen
+   
+   ```python
+   while running:...
+        if life_num:
+              for i in range(life_num): #if 0<life<3
+                   screen.blit(life_image, \
+                            (width - 10 - (i + 1) * life_rect.width, \ #put the number of life left on the screen
+                            height - 10 - life_rect.height))
    ``` 
