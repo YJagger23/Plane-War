@@ -190,6 +190,8 @@ if __name__ == "__main__": #operate the game
       from pygame.locals import * #import locals to enable get_pressed function to use keyboard
       
       def main():...
+          clock = pygame.time.Clock() #create a clock to help set fps
+          
           Ares = player.Player(bg_size) #call the player into the main structure as Ares
           
           key_pressed = pygame.key.get_pressed() #add key.get_pressed function when using keyboard to control
@@ -205,6 +207,8 @@ if __name__ == "__main__": #operate the game
           while running:...     
               if Ares.active:
                   screen.blit(Ares.image, Ares.rect) #put the player's plane into the screen as defined in the player class
+              
+              clock.tick(60)#set the framerate to be 60 fps
    ```
    2) Add the enemy plane (EnemyS for instance; EnemyB will be similar)
    
@@ -563,38 +567,33 @@ if __name__ == "__main__": #operate the game
                         music_image = mute_image
    ```
 
-3) Bug a to be fixed.
+3) Use invincible to protect the player after reset.
    
    ```python
    class player:...
-        self.invicincible = False #set the player to be invicinble for a period
-        
+        self.invicincible = False #set the player not to be invicinble for a period
+        ...
+        def reset(self):
+            self.invincible = True #set the player to be invicinble when reset
+       
    def main():... 
-        mute = False
-        mute_image = pygame.image.load("images/mute.png")
-        music_rect = mute_image.get_rect() 
-        music_rect.left, music_rect.top = (width - restarted_rect.width-5)\
-                                    ,40+restarted_rect.height
-        unmute_image = pygame.image.load("images/unmute.png")
-        music_image = mute_image
-   
+        INVINCIBLE_TIME = USEREVENT #define a timer for Invincible function
+        
    while running:...
-            elif event.type == MOUSEBUTTONDOWN:
-                if event.button == 1 and music_rect.collidepoint(event.pos):
-                    mute = not mute
-                    if mute:
-                        pygame.mixer.music.pause()
-                        pygame.mixer.pause()
-                    else:
-                        pygame.mixer.music.unpause()
-                        pygame.mixer.unpause
-            elif event.type == MOUSEMOTION: #when mouse move 
-                if music_rect.collidepoint(event.pos): #when mouse move on the icon
-                    if mute:
-                        music_image = unmute_image #change the icon according to the status
-                else:
-                    if not mute:
-                        music_image = mute_image
+            elif event.type == INVINCIBLE_TIME:#set the event rule for the invincible function
+                Ares.invincible = False #when invincible is inactive
+                pygame.time.set_timer(INVINCIBLE_TIME, 0) #the timer won't count
+            
+            if enemies_down and not Ares.invincible: #include the invincible condition
+                Ares.active = False
+                for e in enemies_down:
+                    e.active = False
+
+            if Ares.active:
+                screen.blit(Ares.image, Ares.rect)
+            else:
+                if not (delay % 15):
+                    life_num -= 1
+                    Ares.reset()
+                    pygame.time.set_timer(INVINCIBLE_TIME, 3*1000) #start the invincible timer when reset the player
    ```
-    #set the player to be invicinble for a period
-        self.invicincible = False 
